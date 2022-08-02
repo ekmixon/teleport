@@ -7,13 +7,13 @@ def escaped(s):
 
 def tput(term, name):
 	try:
-		return subprocess.check_output(['tput', '-T%s' % term, name]).decode()
+		return subprocess.check_output(['tput', f'-T{term}', name]).decode()
 	except subprocess.CalledProcessError as e:
 		return e.output.decode()
 
 
 def w(s):
-	if s == None:
+	if s is None:
 		return
 	sys.stdout.write(s)
 

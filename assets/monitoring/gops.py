@@ -25,14 +25,13 @@ def collect():
     go = {}
     prev_stack = ""
     for line in sys.stdin:
-        if "goroutine" in line:
-            if prev_stack != "":
-                go[prev_stack] = go.setdefault(prev_stack,0) + 1
-                prev_stack = ""
+        if "goroutine" in line and prev_stack != "":
+            go[prev_stack] = go.setdefault(prev_stack,0) + 1
+            prev_stack = ""
         if ".go" in line:
             parts = line.split()
             prev_stack = parts[0]
-    print json.dumps(go)
+    go = {}
 
 def diff(a, b):
     with open(a) as fa:
